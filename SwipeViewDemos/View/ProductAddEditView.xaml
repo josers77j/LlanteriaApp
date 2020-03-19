@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SwipeViewDemos.View.ProductAddEditView"
+             xmlns:vm="clr-namespace:SwipeViewDemos.ViewModel">
+    <ContentPage.BindingContext>
+        <vm:ProductAddEditViewModel/>
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <Label Text="Productos" FontSize="25"  Margin="80,0" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout Padding="20,20">
+            <StackLayout>
+                <Label Text="ingrese una cantidad para agregar mas productos" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <StackLayout Padding="60,0" >
+                    <Entry Placeholder="Cantidad" Text="{Binding CantidadEntry}"/>
+                    </StackLayout>
+                    
+                </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Cantidad de productos: " FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="20"/>
+                <Label Text="{Binding CantidadProduct}" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="18"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Cantidad total: " FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="20"/>
+                <Label Text="{Binding CantidadTotal}" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="18"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Padding="20,350" >
+                <ImageButton Source="garrapata.png" Command="{Binding SaveCommand}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent"/>
+                <ImageButton Source="dejar.png" Command="{Binding CancelarCommand}" VerticalOptions="Center" HorizontalOptions="EndAndExpand" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

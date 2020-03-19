@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SwipeViewDemos.View.CategoriaView"
+             xmlns:VM="clr-namespace:SwipeViewDemos.ViewModel"
+             xmlns:BH="clr-namespace:SwipeViewDemos.Behaviors"
+             >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="mas.png" Command="{Binding CategoryCommand}"/>
+    </ContentPage.ToolbarItems>
+    <NavigationPage.TitleView>
+        <Label Text="Categorias" FontSize="25"  Margin="80,0" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+    </NavigationPage.TitleView>
+    <ContentPage.BindingContext>
+        <VM:CategoriaViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="(Si no aparece una Producto, desliza desde arriba hacia abajo para refrescar la lista de Productos)" FontSize="15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                <RefreshView IsRefreshing="{Binding IsRefreshing}" RefreshColor="#000" Command="{Binding RefreshCommand}">
+
+                <ListView
+                ItemsSource="{Binding oCategory}"
+                SelectedItem="{Binding Category}"
+                BH:ItemTappedAttached.Command="{Binding DetalleCommand}"
+                    x:Name="ListaMesas"
+                HasUnevenRows="True">
+                    
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                               
+
+                                    <StackLayout>
+                                        <Label Text="{Binding Nombre_Categoria}" FontFamily="Poppins-Light.ttf#Poppins-Light" Padding="20,20" FontSize="25" BackgroundColor="White"/>
+                                    </StackLayout>
+                                
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </RefreshView>
+           
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SwipeViewDemos.View.VentasEditView"
+             xmlns:VM="clr-namespace:SwipeViewDemos.ViewModel">
+    <ContentPage.BindingContext>
+        <VM:VentasEditViewModel/>
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <Label Text="Ventas" FontSize="25"  Margin="100,0" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Rellenar los items de arriba hacia abajo" FontSize="16" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+            <StackLayout Padding="20,20">
+
+                <Picker Title="Categoria" ItemsSource="{Binding oCategoria}" SelectedItem="{Binding Categoria}" ItemDisplayBinding="{Binding Nombre_Categoria}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                <Picker Title="Producto" ItemsSource="{Binding oProductos}" ItemDisplayBinding="{Binding Nombre_Producto}" SelectedItem="{Binding Productos}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                <StackLayout Orientation="Horizontal" Padding="5,5">
+                    <Label Text="Factura" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                    <Label Text="si" IsVisible="{Binding lblsi}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                    <Switch IsToggled="{Binding Factura}"/>
+                    <Label Text="no" IsVisible="{Binding lblno}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                </StackLayout>
+                <Entry Text="{Binding Cantidad}" FontSize="20" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                <Label Text="Restante de producto" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+                <Label Text="{Binding CantidadTotal}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                <Label Text="precio de producto" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+                <Label Text="{Binding CantidadP}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                <StackLayout Orientation="Horizontal" Padding="20,150" >
+                    <ImageButton Source="garrapata.png" Command="{Binding GuardarCommand}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent"/>
+                    <ImageButton Source="dejar.png" Command="{Binding CancelarCommand}" VerticalOptions="Center" HorizontalOptions="EndAndExpand" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

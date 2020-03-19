@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SwipeViewDemos.View.MenuPageView"
+             xmlns:vm="clr-namespace:SwipeViewDemos.ViewModel"
+             BackgroundColor="#FAFAFA">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="unnamed.png" Command="{Binding CategoriaCommand}"/>
+        <ToolbarItem IconImageSource="pregunta.png" Command="{Binding QuestionCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.BindingContext>
+        <vm:MenuPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="20,25">
+            <Label Text="Bienvenido" 
+            FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="36" />
+
+            <Label Text="Opciones" FontSize="20" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+            <StackLayout Orientation="Horizontal" Padding="0,20">
+                <ImageButton Source="product.png" BackgroundColor="Transparent"  Command="{Binding ProductoCommand}" HeightRequest="110" WidthRequest="110" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                <ImageButton Source="Sell.png" BackgroundColor="Transparent" Command="{Binding ListVenta}" HeightRequest="110" WidthRequest="110" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                <ImageButton Source="productnew.png" BackgroundColor="Transparent" Command="{Binding ProductAddCommand }" HeightRequest="110" WidthRequest="110" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Padding="20,20">
+                <Label Text="Productos" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                <Label Text="Ventas" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                <Label Text="Cantidad" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
+            </StackLayout>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

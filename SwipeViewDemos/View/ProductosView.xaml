@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SwipeViewDemos.View.ProductosView"
+             xmlns:vm="clr-namespace:SwipeViewDemos.ViewModel"
+             xmlns:bh="clr-namespace:SwipeViewDemos.Behaviors">
+    <ContentPage.BindingContext>
+        <vm:ProductosViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="mas.png" Command="{Binding NuevoCommand}"/>
+    </ContentPage.ToolbarItems>
+    <NavigationPage.TitleView>
+        <Label Text="Productos" FontSize="25"  Margin="80,0" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="(Si no aparece una categoria, desliza desde arriba hacia abajo para refrescar la lista de categorias)" FontSize="15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+
+            <RefreshView IsRefreshing="{Binding IsRefreshing}" RefreshColor="#000" Command="{Binding RefreshCommand}">
+                <ListView
+                ItemsSource="{Binding oProductos}"
+                SelectedItem="{Binding Productos}"
+                x:Name="productlist"
+                HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Eliminar" Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference productlist}}" CommandParameter="{Binding .}}" />
+                                    
+                                </ViewCell.ContextActions>
+                                <StackLayout Padding="10,10">
+                                    <StackLayout Orientation="Horizontal" Padding="5,5">
+                                        <Label Text="Nombre de producto:" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="21"/>
+                                        <Label Text="{Binding Nombre_Producto}" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="21"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Padding="5,5">
+                                        <Label Text="Cantidad: " FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="16"/>
+                                        <Label Text="{Binding Cantidad}" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="16"/>
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
