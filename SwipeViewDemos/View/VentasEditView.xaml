@@ -10,31 +10,68 @@
         <VM:VentasEditViewModel/>
     </ContentPage.BindingContext>
     <NavigationPage.TitleView>
-        <Label Text="Ventas" FontSize="25"  Margin="100,0" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+        <Label Text="Ventas" FontSize="25"  FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
     </NavigationPage.TitleView>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Rellenar los items de arriba hacia abajo" FontSize="16" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-            <StackLayout Padding="20,20">
 
-                <Picker Title="Categoria" ItemsSource="{Binding oCategoria}" SelectedItem="{Binding Categoria}" ItemDisplayBinding="{Binding Nombre_Categoria}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                <Picker Title="Producto" ItemsSource="{Binding oProductos}" ItemDisplayBinding="{Binding Nombre_Producto}" SelectedItem="{Binding Productos}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                <StackLayout Orientation="Horizontal" Padding="5,5">
-                    <Label Text="Factura" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                    <Label Text="si" IsVisible="{Binding lblsi}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                    <Switch IsToggled="{Binding Factura}"/>
-                    <Label Text="no" IsVisible="{Binding lblno}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+
+                    <StackLayout>
+                        <StackLayout Padding="10,10">
+                            <Picker Title="Categoria (opcional)" ItemsSource="{Binding oCategoria}" SelectedItem="{Binding Categoria}" ItemDisplayBinding="{Binding Nombre_Categoria}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                            <Picker Title="Producto" ItemsSource="{Binding oProductos}" ItemDisplayBinding="{Binding Nombre_Producto}" SelectedItem="{Binding Productos}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                            <StackLayout Orientation="Horizontal" Padding="5,5">
+                                <Label Text="Factura" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                                <Label Text="si" IsVisible="{Binding lblsi}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                                <Switch IsToggled="{Binding Factura}"/>
+                                <Label Text="no" IsVisible="{Binding lblno}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                            </StackLayout>
+
+                            <Label Text="{Binding CantidadLbL}" FontSize="20" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                            <Button Command="{Binding UpCommand}" Text="up" IsEnabled="{Binding UpEnable}"/>
+                            <Button Command="{Binding DownCommand}" Text="down" IsEnabled="{Binding DownEnable}"/>
+
+
+
+
+
+
+                            <StackLayout Orientation="Vertical" Padding="20,0" >
+                            
+                            <Label Text="Restante de producto" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+                            <Label Text="{Binding CantidadTotal}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+
+                            <Label Text="precio total" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+                            <Label Text="{Binding PrecioTotal}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+
+
+                        </StackLayout>
+                    </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                    <Label Text="Detalle del producto" FontSize="20" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontAttributes="Bold"/>
+                    <StackLayout Orientation="Vertical" Padding="0,5">
+                        <Label Text="precio de producto:" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+                        <Label Text="{Binding Precio}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Padding="0,5">
+                        <Label Text="cantidad total:" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+                        <Label Text="{Binding CantidadP}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                    </StackLayout>
+
                 </StackLayout>
-                <Entry Text="{Binding Cantidad}" FontSize="20" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                <Label Text="Restante de producto" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
-                <Label Text="{Binding CantidadTotal}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                <Label Text="precio de producto" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
-                <Label Text="{Binding CantidadP}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                <StackLayout Orientation="Horizontal" Padding="20,150" >
-                    <ImageButton Source="garrapata.png" Command="{Binding GuardarCommand}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent"/>
-                    <ImageButton Source="dejar.png" Command="{Binding CancelarCommand}" VerticalOptions="Center" HorizontalOptions="EndAndExpand" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent"/>
+                    
+                </StackLayout>
+                <StackLayout VerticalOptions="CenterAndExpand">
+                    <!-- middle controls -->
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                    <!-- bottom controls -->
+                    <Button Text="Pagar" Command="{Binding GuardarCommand}" />
                 </StackLayout>
             </StackLayout>
-        </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

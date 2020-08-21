@@ -10,7 +10,7 @@
         <vm:ProductAddEditViewModel/>
     </ContentPage.BindingContext>
     <NavigationPage.TitleView>
-        <Label Text="Productos" FontSize="25"  Margin="80,0" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+        <Label Text="Productos" FontSize="25" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout Padding="20,20">

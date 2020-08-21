@@ -11,6 +11,8 @@ namespace SwipeViewDemos.ViewModel
 {
     public class CategoriaEditViewModel
     {
+        #region propiedades/command
+        
         public INavigation Navigation;
         public CategoriaModel Category { get; set; }
         public Command GuardarCommand { get; set; }
@@ -20,9 +22,13 @@ namespace SwipeViewDemos.ViewModel
 
         public bool GuardarVisible { get; set; }
         public bool CancelarVisible { get; set; }
+        #endregion
+
+        #region constructor/es
+
         public CategoriaEditViewModel()
         {
-            
+
         }
         public CategoriaEditViewModel(INavigation navigation)
         {
@@ -31,27 +37,30 @@ namespace SwipeViewDemos.ViewModel
             CancelarCommand = new Command(cancelar);
             Category = new CategoriaModel();
             GuardarCommand = new Command(async () => await Guardar());
-            
-            
+
+
         }
 
+        #endregion
+
+        #region metodos
         private async void cancelar()
         {
             await PopupNavigation.Instance.PopAsync();
         }
 
-        public CategoriaEditViewModel( CategoriaModel Categoria)
+        public CategoriaEditViewModel(CategoriaModel Categoria)
         {
             Category = Categoria;
             GuardarCommand = new Command(async () => await Guardar());
-            
+
         }
 
         public async Task Guardar()
         {
             if (string.IsNullOrEmpty(Category.Nombre_Categoria))
             {
-                await App.Current.MainPage.DisplayAlert("Mensaje","Sin datos a guardar","ok");
+                await App.Current.MainPage.DisplayAlert("Mensaje", "Sin datos a guardar", "ok");
                 await PopupNavigation.Instance.PopAsync();
             }
             else
@@ -60,8 +69,11 @@ namespace SwipeViewDemos.ViewModel
                 await App.Database.SaveItemAsync(Category);
                 await PopupNavigation.Instance.PopAsync();
             }
-            
+
         }
+        #endregion
+
+
     }
 
 }

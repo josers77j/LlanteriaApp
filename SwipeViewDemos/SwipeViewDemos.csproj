@@ -32,10 +32,10 @@
     <EmbeddedResource Update="View\ProductosView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\pruebaPage.xaml">
+    <EmbeddedResource Update="View\QuestionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\QuestionView.xaml">
+    <EmbeddedResource Update="View\VentasDescripView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\VentasEditView.xaml">

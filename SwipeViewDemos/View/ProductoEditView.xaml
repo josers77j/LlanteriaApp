@@ -7,24 +7,36 @@
              x:Class="SwipeViewDemos.View.ProductoEditView"
              xmlns:vm="clr-namespace:SwipeViewDemos.ViewModel">
     <NavigationPage.TitleView>
-        <Label Text="Productos" FontSize="25"  Margin="80,0" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+        <Label Text="Productos" FontSize="25" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
     </NavigationPage.TitleView>
     <ContentPage.BindingContext>
         <vm:ProductoEditViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Rellenar los items de arriba hacia abajo" FontSize="16" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <StackLayout>
-                <Entry Text="{Binding Producto.Nombre_Producto}" Placeholder="Ejemplo:105-70R15, Mechas..." FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-            <Entry Text="{Binding Producto.Precio}" Keyboard="Numeric" Placeholder="Precio del producto" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-            <Entry Text="{Binding Producto.Cantidad}" Keyboard="Numeric" Placeholder="Cantidad del producto" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-            <Picker Title="Selecciona una categoria" ItemsSource="{Binding oCategory}" ItemDisplayBinding="{Binding Nombre_Categoria}" SelectedItem="{Binding Category}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-            <StackLayout Orientation="Horizontal" Padding="20,350" >
-                <ImageButton Source="garrapata.png" Command="{Binding GuardarCommand}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent"/>
-                <ImageButton Source="dejar.png" Command="{Binding ProductCommand}" VerticalOptions="Center" HorizontalOptions="EndAndExpand" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent"/>
-            </StackLayout>
+
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+                <!-- top controls -->
+
+                <StackLayout>
+                        <Entry Text="{Binding Producto.Nombre_Producto}" Placeholder="Ejemplo:105-70R15, Mechas..." FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                        <Entry Text="{Binding Producto.Precio}" Keyboard="Numeric" Placeholder="Precio del producto" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                        <Entry Text="{Binding Producto.Cantidad}" Keyboard="Numeric" Placeholder="Cantidad del producto" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+                    <Picker Title="Selecciona una categoria" ItemsSource="{Binding oCategory}" ItemDisplayBinding="{Binding Nombre_Categoria}" SelectedItem="{Binding Category}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
                 </StackLayout>
+                
+            </StackLayout>
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <!-- middle controls -->
+
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                <!-- bottom controls -->
+                <ImageButton Source="garrapata.png" Command="{Binding GuardarCommand}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent"/>
+
+            </StackLayout>
         </StackLayout>
+
+        
     </ContentPage.Content>
 </ContentPage>

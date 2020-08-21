@@ -12,9 +12,6 @@ namespace SwipeViewDemos.ViewModel
 {
     public class ProductosViewModel:BaseClass
     {
-		public Command DeleteCommand { get; set; }
-
-
 		#region refresh view function
 		const int RefreshDuration = 2;
 
@@ -42,12 +39,15 @@ namespace SwipeViewDemos.ViewModel
 
 		#endregion
 
+		#region propiedades full/observable collection
 		private ProductoModel _Productos;
 
 		public ProductoModel Productos
 		{
 			get { return _Productos; }
-			set { _Productos = value;
+			set
+			{
+				_Productos = value;
 				OnPropertyChanged();
 			}
 		}
@@ -57,20 +57,31 @@ namespace SwipeViewDemos.ViewModel
 		public ObservableCollection<ProductoModel> oProductos
 		{
 			get { return _oProductos; }
-			set { _oProductos = value;
+			set
+			{
+				_oProductos = value;
 				OnPropertyChanged();
 			}
 		}
 
+		#endregion
+
+		#region propiedades/command
+		public Command DeleteCommand { get; set; }
 		public Command NuevoCommand { get; set; }
 
+		#endregion
+
+		#region constructor/es
 		public ProductosViewModel()
 		{
 			NuevoCommand = new Command(nuevo);
 			DeleteCommand = new Command<ProductoModel>(async (Product) => await delete(Product));
 			cargarProductos();
 		}
+		#endregion
 
+		#region metodos
 		private async Task delete(ProductoModel Product)
 		{
 			var answer = await App.Current.MainPage.DisplayAlert("Mensaje", "Al eliminar un producto, se borrara de la lista de ventas, esta seguro?", "si", "no");
@@ -97,5 +108,11 @@ namespace SwipeViewDemos.ViewModel
 			var listatemporal = await App.pDatabase.GetItemsAsync();
 			oProductos = new ObservableCollection<ProductoModel>(listatemporal);
 		}
+		#endregion
+
+
+
+
+
 	}
 }

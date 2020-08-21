@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="SwipeViewDemos.View.VentasView"
-             xmlns:vm="clr-namespace:SwipeViewDemos.ViewModel">
+             xmlns:vm="clr-namespace:SwipeViewDemos.ViewModel"
+             xmlns:bh="clr-namespace:SwipeViewDemos.Behaviors">
     <ContentPage.BindingContext>
         <vm:VentasViewModel/>
     </ContentPage.BindingContext>
@@ -13,7 +14,7 @@
         <ToolbarItem IconImageSource="mas.png" Command="{Binding NuevoCommand}"/>
     </ContentPage.ToolbarItems>
     <NavigationPage.TitleView>
-        <Label Text="Ventas" FontSize="25"  Margin="100,0" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+        <Label Text="Ventas" FontSize="25" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
@@ -22,22 +23,30 @@
             <RefreshView IsRefreshing="{Binding IsRefreshing}" RefreshColor="#000" Command="{Binding RefreshCommand}">
                 <ListView
                 ItemsSource="{Binding oProductVenta}"
-                SelectedItem="{Binding ProductVenta}"
-                
-                HasUnevenRows="True">
+                SelectedItem="{Binding ProductVenta}"                 
+                    x:Name="ListaMesas"
+                HasUnevenRows="True"
+                    SelectionMode="None">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Detalle" Command="{Binding Path=BindingContext.DetalleCommand, Source={x:Reference ListaMesas}}" CommandParameter="{Binding .}}" />
+
+                                </ViewCell.ContextActions>
                                 <StackLayout Padding="10,10">
                                     <StackLayout Orientation="Horizontal" Padding="5,5">
-                                        <Label Text="Producto:" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="21"/>
+                                        <Label Text="Nombre de Producto:" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="21"/>
                                         <Label Text="{Binding Nombre_Producto}" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="21"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Padding="5,5">
-                                        <Label Text="Vendidos: " FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="16"/>
+                                        <Label Text="Productos Vendidos: " FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="16"/>
                                         <Label Text="{Binding Cantidadv}" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="16"/>
                                     </StackLayout>
-
+                                    <StackLayout Orientation="Horizontal" Padding="5,5">
+                                        <Label Text="Total en venta: " FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="16"/>
+                                        <Label Text="{Binding NPrice}" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="16"/>
+                                    </StackLayout>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

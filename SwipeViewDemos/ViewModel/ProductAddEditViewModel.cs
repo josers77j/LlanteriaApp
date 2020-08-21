@@ -9,12 +9,16 @@ namespace SwipeViewDemos.ViewModel
 {
     public class ProductAddEditViewModel:BaseClass
     {
+
+		#region propiedades full/observable collection
 		private ProductoModel _Product;
 
 		public ProductoModel Product
 		{
 			get { return _Product; }
-			set { _Product = value;
+			set
+			{
+				_Product = value;
 				OnPropertyChanged();
 			}
 		}
@@ -24,54 +28,20 @@ namespace SwipeViewDemos.ViewModel
 		public ObservableCollection<ProductoModel> oProduct
 		{
 			get { return _oProduct; }
-			set { _oProduct = value;
+			set
+			{
+				_oProduct = value;
 				OnPropertyChanged();
 			}
 		}
+		#endregion
 
-
+		#region propiedades/command
 		public Command SaveCommand { get; set; }
 		public Command CancelarCommand { get; set; }
-		public ProductAddEditViewModel()
-		{
+		#endregion
 
-		}
-
-		public ProductAddEditViewModel(ProductoModel Producto)
-		{
-			CancelarCommand = new Command(cancelar);
-			oProduct = new ObservableCollection<ProductoModel>();
-			oProduct.Add(Producto);
-			Product = new ProductoModel();
-			Product = Producto;
-			CantidadProduct = Product.Cantidad;
-			SaveCommand = new Command(save);
-		}
-
-		private async void cancelar()
-		{
-			await App.Current.MainPage.Navigation.PopAsync();
-		}
-
-		private async void save()
-		{
-			if(CantidadEntry >= 1)
-			{
-				Product.ID = Product.ID;
-
-				Product.Cantidad = CantidadEntry + Product.Cantidad;
-				await App.pDatabase.SaveItemAsync(Product);
-				await App.Current.MainPage.DisplayAlert("Mensaje", "Guardado", "ok");
-				await App.Current.MainPage.Navigation.PopAsync();
-			}
-			else
-			{
-				await App.Current.MainPage.DisplayAlert("Mensaje","no se agrego una cantidad de productos","ok");
-			}
-			
-		}
-
-
+		#region propiedades de muestra
 		private int _CantidadTotal;
 
 		public int CantidadTotal
@@ -94,7 +64,7 @@ namespace SwipeViewDemos.ViewModel
 			set
 			{
 				_CantidadEntry = value;
-				OnPropertyChanged();				
+				OnPropertyChanged();
 				CantidadTotal = CantidadEntry + CantidadProduct;
 			}
 		}
@@ -108,10 +78,66 @@ namespace SwipeViewDemos.ViewModel
 			{
 				_CantidadProduct = value;
 				OnPropertyChanged();
-				
+
 			}
 		}
 
+		#endregion
+
+		#region constructor/es
+		public ProductAddEditViewModel()
+		{
+
+		}
+
+		public ProductAddEditViewModel(ProductoModel Producto)
+		{
+			CancelarCommand = new Command(cancelar);
+			oProduct = new ObservableCollection<ProductoModel>();
+			oProduct.Add(Producto);
+			Product = new ProductoModel();
+			Product = Producto;
+			CantidadProduct = Product.Cantidad;
+			SaveCommand = new Command(save);
+		}
+
+		#endregion
+
+		#region metodos
+		private async void cancelar()
+		{
+			await App.Current.MainPage.Navigation.PopAsync();
+		}
+
+		private async void save()
+		{
+			if (CantidadEntry >= 1)
+			{
+				Product.ID = Product.ID;
+
+				Product.Cantidad = CantidadEntry + Product.Cantidad;
+				await App.pDatabase.SaveItemAsync(Product);
+				await App.Current.MainPage.DisplayAlert("Mensaje", "Guardado", "ok");
+				await App.Current.MainPage.Navigation.PopAsync();
+			}
+			else
+			{
+				await App.Current.MainPage.DisplayAlert("Mensaje", "no se agrego una cantidad de productos", "ok");
+			}
+
+		}
+
+		#endregion
+
+
+
+
+
+
+
+
+
+		
 
 
 

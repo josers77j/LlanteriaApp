@@ -8,11 +8,12 @@
              xmlns:VM="clr-namespace:SwipeViewDemos.ViewModel"
              xmlns:BH="clr-namespace:SwipeViewDemos.Behaviors"
              >
+  
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="mas.png" Command="{Binding CategoryCommand}"/>
     </ContentPage.ToolbarItems>
     <NavigationPage.TitleView>
-        <Label Text="Categorias" FontSize="25"  Margin="80,0" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+        <Label Text="Categorias" FontSize="25"   FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
     </NavigationPage.TitleView>
     <ContentPage.BindingContext>
         <VM:CategoriaViewModel/>

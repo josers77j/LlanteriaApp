@@ -13,6 +13,9 @@ namespace SwipeViewDemos.ViewModel
 {
     public class VentasViewModel:BaseClass
     {
+
+
+
 		#region refresh view function
 		const int RefreshDuration = 2;
 
@@ -39,72 +42,118 @@ namespace SwipeViewDemos.ViewModel
 		}
 
 		#endregion
-		public Command NuevoCommand{ get; set; }
-		private VentaProductModel _ProductVenta;
 
+		#region propiedades full/observable collection
+		private VentaProductModel _ProductVenta;
 		public VentaProductModel ProductVenta
 		{
 			get { return _ProductVenta; }
-			set { _ProductVenta = value;
+			set
+			{
+				_ProductVenta = value;
 				OnPropertyChanged();
 			}
 		}
 
 		private ObservableCollection<VentaProductModel> _oProductVenta;
-
 		public ObservableCollection<VentaProductModel> oProductVenta
 		{
 			get { return _oProductVenta; }
-			set { _oProductVenta = value;
+			set
+			{
+				_oProductVenta = value;
 				OnPropertyChanged();
 			}
 		}
 
 
-		private ObservableCollection<ProductoModel> _oProduct;
-
-		public ObservableCollection<ProductoModel> oProduct
-		{
-			get { return _oProduct; }
-			set { _oProduct = value;
-				OnPropertyChanged();
-			}
-		}
+		
 
 		private ProductoModel _Product;
 
 		public ProductoModel Product
 		{
 			get { return _Product; }
-			set { _Product = value;
+			set
+			{
+				_Product = value;
 				OnPropertyChanged();
 
 			}
 		}
 
 
-		private VentaModel _Ventas;
+		private VentaProductModel _Ventas;
 
-		public VentaModel Ventas
+		public VentaProductModel Ventas
 		{
 			get { return _Ventas; }
-			set { _Ventas = value; 
-				OnPropertyChanged(); }
+			set
+			{
+				_Ventas = value;
+				OnPropertyChanged();
+				
+			}
 		}
 
-		private ObservableCollection<VentaModel> _oVentas;
+		private ObservableCollection<VentaProductModel> _oVentas;
 
-		public ObservableCollection<VentaModel> oVentas
+		public ObservableCollection<VentaProductModel> oVentas
 		{
 			get { return _oVentas; }
-			set { _oVentas = value; 
-				OnPropertyChanged(); }
+			set
+			{
+				_oVentas = value;
+				OnPropertyChanged();
+			}
 		}
 
+		private string _Precio;
+
+		public string NewPrice
+		{
+			get { return _Precio; }
+			set { _Precio = value; OnPropertyChanged();
+				NewPrice = Convert.ToString(5);
+			}
+		}
+
+		private string _NPrice;
+
+		public string NPrice
+		{
+			get { return _NPrice; }
+			set { _NPrice = value; OnPropertyChanged(); }
+		}
+
+		#endregion
+
+		#region propiedades/command
+		public Command NuevoCommand { get; set; }
+		public Command DetalleCommand { get; set; }
+
+		#endregion
+
+		#region constructor/es
 		public VentasViewModel()
 		{
 			NuevoCommand = new Command(nuevo);
-			cargarventas();	
+			DetalleCommand = new Command<VentaProductModel>(async (Product) => await VentasD(Product));
+			cargarventas();
+			NPrice = "hola";
+		}
+
+		
+
+		#endregion
+
+		#region metodos
+
+		private async Task VentasD(VentaProductModel Data)
+		{
+			var pagina = new VentasDescripView();
+			pagina.BindingContext = new VentasDescripViewModel(Data);
+			await App.Current.MainPage.Navigation.PushAsync(pagina);
 		}
 
 		private async void nuevo()
@@ -116,28 +165,36 @@ namespace SwipeViewDemos.ViewModel
 
 		private async void cargarventas()
 		{
+
 			var producttemporal = await App.pDatabase.GetItemsAsync();
 			var ventatemporal = await App.vDatabase.GetItemsAsync();
 
 			IEnumerable<VentaProductModel> ListaInnerJoin = (from vt in ventatemporal
-																	   join pt in producttemporal
-																	   on vt.IdProducto equals pt.ID
-																	   select new VentaProductModel
-																	   {
-																		   ID_Sell = vt.ID,
-																		   IdProducto = vt.IdProducto,
-																		   Cantidadv = vt.Cantidad,
-																		   Factura = vt.Factura,
-																		   
-																		  ID_Product  = pt.ID,
-																		   Nombre_Producto = pt.Nombre_Producto,
-																		   Cantidad = pt.Cantidad,
-																		   Precio = pt.Precio,
-																		   IdCategoria = pt.IdCategoria,
-																		   
-																	   }).ToList();
+															 join pt in producttemporal
+															 on vt.IdProducto equals pt.ID
+															 select new VentaProductModel
+															 {
+																 ID_Sell = vt.ID,
+																 IdProducto = vt.IdProducto,
+																 Cantidadv = vt.Cantidad,
+																 Factura = vt.Factura,
+
+																 ID_Product = pt.ID,
+																 Nombre_Producto = pt.Nombre_Producto,
+																 Cantidad = pt.Cantidad,
+																 Precio = pt.Precio,
+																 IdCategoria = pt.IdCategoria,
+
+															 }).ToList();
 
 			oProductVenta = new ObservableCollection<VentaProductModel>(ListaInnerJoin);
 		}
+		#endregion
+
+
+
+
+
+
 	}
 }

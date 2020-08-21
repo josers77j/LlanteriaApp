@@ -14,6 +14,7 @@ namespace SwipeViewDemos.ViewModel
 {
     public class ProductAddViewModel :BaseClass
     {
+		#region propiedades full/observable collection
 		private ObservableCollection<CategoriaModel> _oCategory;
 
 		public ObservableCollection<CategoriaModel> oCategory
@@ -25,10 +26,12 @@ namespace SwipeViewDemos.ViewModel
 
 		private CategoriaModel _Category;
 
-		public CategoriaModel Category 
+		public CategoriaModel Category
 		{
 			get { return _Category; }
-			set { _Category = value;
+			set
+			{
+				_Category = value;
 				OnPropertyChanged();
 			}
 		}
@@ -38,7 +41,9 @@ namespace SwipeViewDemos.ViewModel
 		public ObservableCollection<ProductoModel> oProductt
 		{
 			get { return _oProduct; }
-			set { _oProduct = value;
+			set
+			{
+				_oProduct = value;
 				OnPropertyChanged();
 			}
 		}
@@ -50,19 +55,26 @@ namespace SwipeViewDemos.ViewModel
 			get { return _Product; }
 			set { _Product = value; }
 		}
+		#endregion
 
+		#region propiedades/command
 		public Command EditCommand { get; set; }
 
 		public Command DeleteCommand { get; set; }
+		#endregion
+
+		#region constructor/es
 		public ProductAddViewModel()
 		{
 			CargarCategory();
 			Cargarproduct();
 			DeleteCommand = new Command<ProductoModel>(async (Product) => await delete(Product));
 			EditCommand = new Command<ProductoModel>(async (Product) => await edit(Product));
-			
-		}
 
+		}
+		#endregion
+
+		#region metodos
 		private async Task edit(ProductoModel product)
 		{
 			var pagina = new ProductAddEditView();
@@ -98,6 +110,15 @@ namespace SwipeViewDemos.ViewModel
 			oCategory = new ObservableCollection<CategoriaModel>(listatemporal.OrderBy(category => category.Nombre_Categoria));
 		}
 
-		
+		#endregion
+
+
+
+
+
+
+
+
+
 	}
 }

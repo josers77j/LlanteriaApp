@@ -10,33 +10,42 @@ namespace SwipeViewDemos.ViewModel
 {
     public class MenuPageViewModel
     {
+       
+        #region propiedades/command
         public Command QuestionCommand { get; set; }
         public Command CategoriaCommand { get; set; }
         public Command ProductoCommand { get; set; }
         public Command VentaCommand { get; set; }
         public Command ListVenta { get; set; }
-        public Command ProductAddCommand { get; set; }
+        public Command MakeSaleCommand { get; set; }
         public CategoriaModel Category { get; set; }
+
+        #endregion
+
+        #region constructor/es
         public MenuPageViewModel()
         {
             QuestionCommand = new Command(question);
-            ProductAddCommand = new Command(add);
+            MakeSaleCommand = new Command(MSale);
             VentaCommand = new Command(venta);
             CategoriaCommand = new Command(category);
             ProductoCommand = new Command(product);
             ListVenta = new Command(list);
         }
 
+        #endregion
+
+        #region metodos
         private async void question()
         {
             var pagina = new QuestionView();
             await App.Current.MainPage.Navigation.PushAsync(pagina);
         }
 
-        private async void add()
+        private async void MSale()
         {
-            var pagina = new ProductAddView();
-            pagina.BindingContext = new ProductAddViewModel();
+            var pagina = new VentasEditView();
+            pagina.BindingContext = new VentasEditViewModel();
             await App.Current.MainPage.Navigation.PushAsync(pagina);
         }
 
@@ -67,5 +76,7 @@ namespace SwipeViewDemos.ViewModel
             pagina.BindingContext = new CategoriaViewModel(Category);
             await App.Current.MainPage.Navigation.PushAsync(pagina);
         }
+        #endregion
+
     }
 }

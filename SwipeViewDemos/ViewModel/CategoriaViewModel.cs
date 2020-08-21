@@ -15,6 +15,7 @@ namespace SwipeViewDemos.ViewModel
     public class CategoriaViewModel:BaseClass
     {
 		#region refresh view function
+		
 		const int RefreshDuration = 2;
 
 		bool isRefreshing;
@@ -40,22 +41,33 @@ namespace SwipeViewDemos.ViewModel
 		}
 
 		#endregion
+
+		#region propiedades full/ observable collection
+
 		private ObservableCollection<CategoriaModel> _oCategory;
 		private INavigation navigation;
 
 		public ObservableCollection<CategoriaModel> oCategory
 		{
 			get { return _oCategory; }
-			set { _oCategory = value;
-				OnPropertyChanged(); }
+			set
+			{
+				_oCategory = value;
+				OnPropertyChanged();
+			}
 		}
 
+		#endregion
+
+		#region propiedades/command
 		public Command DeleteCommand { get; set; }
 		public Command CategoryCommand { get; set; }
 		public CategoriaModel Category { get; set; }
 
 		public Command DetalleCommand { get; set; }
+		#endregion
 
+		#region constructor/es
 		public CategoriaViewModel()
 		{
 			DeleteCommand = new Command<CategoriaModel>(async (Category) => await delete(Category)); ;
@@ -65,10 +77,14 @@ namespace SwipeViewDemos.ViewModel
 			DeleteCommand = new Command<CategoriaModel>(async (Category) => await delete(Category)); ;
 			Categoria = new CategoriaModel();
 			Category = new CategoriaModel();
-			CategoryCommand = new Command(Cat);
+			CategoryCommand = new Command(Catgoing);
 			this.Category = Categoria;
 			CargarCategory();
 		}
+
+		#endregion
+
+		#region metodos
 
 		private async Task delete(CategoriaModel category)
 		{
@@ -76,7 +92,7 @@ namespace SwipeViewDemos.ViewModel
 			CargarCategory();
 		}
 
-		private async void Cat()
+		private async void Catgoing()
 		{
 			var pagina = new CategoryViewPopUp();
 			pagina.BindingContext = new CategoriaEditViewModel();
@@ -89,5 +105,9 @@ namespace SwipeViewDemos.ViewModel
 			var listatemporal = await App.Database.GetItemsAsync();
 			oCategory = new ObservableCollection<CategoriaModel>(listatemporal.OrderBy(cat => cat.Nombre_Categoria));
 		}
+
+		#endregion
+
+		
 	}
 }
