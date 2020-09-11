@@ -14,29 +14,62 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
 
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <StackLayout Orientation="Horizontal" VerticalOptions="Start">
-                <!-- top controls -->
+        <Grid Padding="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
 
-                <StackLayout>
-                        <Entry Text="{Binding Producto.Nombre_Producto}" Placeholder="Ejemplo:105-70R15, Mechas..." FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                        <Entry Text="{Binding Producto.Precio}" Keyboard="Numeric" Placeholder="Precio del producto" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                        <Entry Text="{Binding Producto.Cantidad}" Keyboard="Numeric" Placeholder="Cantidad del producto" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                    <Picker Title="Selecciona una categoria" ItemsSource="{Binding oCategory}" ItemDisplayBinding="{Binding Nombre_Categoria}" SelectedItem="{Binding Category}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                </StackLayout>
-                
-            </StackLayout>
-            <StackLayout VerticalOptions="CenterAndExpand">
-                <!-- middle controls -->
+            </Grid.RowDefinitions>
 
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" VerticalOptions="End">
-                <!-- bottom controls -->
-                <ImageButton Source="garrapata.png" Command="{Binding GuardarCommand}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-            </StackLayout>
-        </StackLayout>
+            <Label Text="Productos" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+               FontSize="20" Padding="10,10"/>
+            <Label Text="Rellena los campos para agregar el producto" FontSize="Medium"
+               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,10"/>
 
-        
+            <Label Padding="10,10" Text="Nombre del producto" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center"/>
+            <Entry Text="{Binding Producto.Nombre_Producto}"  
+               Placeholder="105,60,15..." Grid.Row="2" Grid.Column="1" >
+            </Entry>
+            
+
+            <Label Padding="10,10" Text="Precio del producto" Grid.Row="3" Grid.Column="0" VerticalOptions="Center"/>
+            <Entry Text="{Binding Precio}" Keyboard="Numeric"
+               Placeholder="49.99..." Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+            </Entry>
+
+            <Label Padding="10,10" Text="Cantidad de producto" Grid.Row="4" Grid.Column="0" VerticalOptions="Center"/>
+            <Entry Text="{Binding Cantidad}"
+               Keyboard="Numeric"
+               Placeholder="5..." Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
+            </Entry>
+
+            <Label Padding="10,10" Text="Categoria/Marca" Grid.Row="5" Grid.Column="0" VerticalOptions="Center"/>
+            <Picker Title="Ninguna seleccionada" ItemsSource="{Binding oCategory}" 
+                    ItemDisplayBinding="{Binding Nombre_Categoria}" SelectedItem="{Binding Category}" 
+                    FontFamily="Poppins-Light.ttf#Poppins-Light"
+                    Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" />
+
+            <Grid HorizontalOptions="FillAndExpand" Grid.Row="7">
+            </Grid>
+            <Button   
+                    Text="Guardar" CornerRadius="25"  Grid.Row="8"  Grid.ColumnSpan="3"
+                TextColor="White" BackgroundColor="#00AE0C" Command="{Binding GuardarCommand}"
+                 Margin="20,20" />
+            
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>

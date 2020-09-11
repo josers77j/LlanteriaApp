@@ -1205,24 +1205,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\joser\\.nuget\\packages\\": {},
+    "C:\\Users\\DELL\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\LlanteriaAppGit\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj",
+      "projectUniqueName": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj",
       "projectName": "SwipeViewDemos.iOS",
-      "projectPath": "C:\\LlanteriaAppGit\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj",
-      "packagesPath": "C:\\Users\\joser\\.nuget\\packages\\",
-      "outputPath": "C:\\LlanteriaAppGit\\SwipeViewDemos.iOS\\obj\\",
+      "projectPath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj",
+      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\joser\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -1236,8 +1236,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\LlanteriaAppGit\\SwipeViewDemos\\SwipeViewDemos.csproj": {
-              "projectPath": "C:\\LlanteriaAppGit\\SwipeViewDemos\\SwipeViewDemos.csproj"
+            "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj": {
+              "projectPath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj"
             }
           }
         }

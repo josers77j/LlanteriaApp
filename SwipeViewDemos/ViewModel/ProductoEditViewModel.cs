@@ -38,6 +38,28 @@ namespace SwipeViewDemos.ViewModel
         }
         #endregion
 
+        #region
+        private string _Precio;
+
+        public string Precio
+        {
+            get { return _Precio; }
+            set { _Precio = value; 
+                OnPropertyChanged(); }
+        }
+
+        private string _Cantidad;
+
+        public string Cantidad
+        {
+            get { return _Cantidad; }
+            set { _Cantidad = value; 
+                OnPropertyChanged(); }
+        }
+
+
+        #endregion
+
         #region propiedades/command
         public Command ProductCommand { get; set; }
         public ProductoModel Producto { get; set; }
@@ -47,6 +69,7 @@ namespace SwipeViewDemos.ViewModel
         #region constructor/es
         public ProductoEditViewModel()
         {
+          
             Producto = new ProductoModel();
             Category = new CategoriaModel();
             ProductCommand = new Command(product);
@@ -69,22 +92,34 @@ namespace SwipeViewDemos.ViewModel
 
         private async void save()
         {
-            if ((string.IsNullOrEmpty(Producto.Nombre_Producto)) ||
-                (string.IsNullOrEmpty(Producto.Precio.ToString())) ||
-                (string.IsNullOrEmpty(Producto.Cantidad.ToString())) ||
-                (string.IsNullOrEmpty(Producto.IdCategoria.ToString())))
+            try
             {
-                await App.Current.MainPage.DisplayAlert("Mensaje", "Todos los campos deben estar llenos", "ok");
+                if 
+            ((string.IsNullOrEmpty(Producto.Nombre_Producto)) ||
+            (string.IsNullOrEmpty(Producto.Precio.ToString())) ||
+            (string.IsNullOrEmpty(Producto.Cantidad.ToString())) ||
+            (string.IsNullOrEmpty(Producto.IdCategoria.ToString())))
+                {
+                    await App.Current.MainPage.DisplayAlert("Mensaje", "Todos los campos deben estar llenos", "ok");
+                }
+                else
+                {
+                    Producto.ID = 0;
+                    Producto.IdCategoria = Category.ID;
+                    Producto.Precio = Convert.ToDouble(Precio);
+                    Producto.Cantidad = Convert.ToInt32(Cantidad);
+                    
+                    await App.pDatabase.SaveItemAsync(Producto);
+                    await App.Current.MainPage.Navigation.PopAsync();
+
+                }
             }
-            else
+            catch (Exception)
             {
-                Producto.ID = 0;
-                Producto.IdCategoria = Category.ID;
-
-                await App.pDatabase.SaveItemAsync(Producto);
-                await App.Current.MainPage.Navigation.PopAsync();
-
+                await App.Current.MainPage.DisplayAlert("Message","Ocurrio un error","ok");
+                throw;
             }
+        
 
             #endregion
 

@@ -14,64 +14,86 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
 
-            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <StackLayout Orientation="Horizontal" VerticalOptions="Start">
 
-                    <StackLayout>
-                        <StackLayout Padding="10,10">
-                            <Picker Title="Categoria (opcional)" ItemsSource="{Binding oCategoria}" SelectedItem="{Binding Categoria}" ItemDisplayBinding="{Binding Nombre_Categoria}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                            <Picker Title="Producto" ItemsSource="{Binding oProductos}" ItemDisplayBinding="{Binding Nombre_Producto}" SelectedItem="{Binding Productos}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                            <StackLayout Orientation="Horizontal" Padding="5,5">
-                                <Label Text="Factura" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                                <Label Text="si" IsVisible="{Binding lblsi}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                                <Switch IsToggled="{Binding Factura}"/>
-                                <Label Text="no" IsVisible="{Binding lblno}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                            </StackLayout>
+        <Grid Padding="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                
 
-                            <Label Text="{Binding CantidadLbL}" FontSize="20" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                            <Button Command="{Binding UpCommand}" Text="up" IsEnabled="{Binding UpEnable}"/>
-                            <Button Command="{Binding DownCommand}" Text="down" IsEnabled="{Binding DownEnable}"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Ventas" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+               FontSize="20" Padding="10,10"/>
+            <Label Text="Rellena los campos para hacer una venta" FontSize="Medium"
+               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,10"/>
+
+            <Label Padding="10,10" Text="Categoria" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center"/>
+            <Picker Title="Ovation/Reparacion(Opcional)" 
+                    ItemsSource="{Binding oCategoria}" SelectedItem="{Binding Categoria}" ItemDisplayBinding="{Binding Nombre_Categoria}" 
+                    FontFamily="Poppins-Light.ttf#Poppins-Light"
+                    Grid.Row="2" Grid.Column="1" />
+            
+         
+
+            <Label Padding="10,10" Text="Producto" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" />
+            <Picker Title="`105,60,15/mecha..." 
+                    ItemsSource="{Binding oProductos}" ItemDisplayBinding="{Binding Nombre_Producto}" SelectedItem="{Binding Productos}" 
+                    FontFamily="Poppins-Light.ttf#Poppins-Light"
+                    Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" />
+            <Label Padding="10,10" Grid.Row="3" Grid.Column="2" Text="{Binding Precio, StringFormat='${0}'}" VerticalOptions="Center"/>
+
+            <Label Text="Factura"
+                   Grid.Row="4" Grid.Column="0" VerticalOptions="Center"
+                   Padding="10,10"/>
+            
+            <Label Grid.Row="4" Grid.Column="2" 
+                Text="si" IsVisible="{Binding lblsi}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+            <CheckBox Grid.Row="4" Grid.Column="1" 
+                IsChecked="{Binding Factura}"/>
+            <Label Grid.Row="4" Grid.Column="2"
+                Text="no" IsVisible="{Binding lblno}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
 
 
 
 
+            <Label Text="{Binding CantidadLbL}" FontSize="20" FontFamily="Poppins-Light.ttf#Poppins-Light"
+                   Grid.Row="7" Grid.Column="1"
+                   HorizontalOptions="Center" VerticalOptions="Center"/>
+            
+            <ImageButton Source="plus.png" Command="{Binding UpCommand}"  IsEnabled="{Binding UpEnable}"
+                    Grid.Row="8"  Grid.Column="0" Grid.ColumnSpan="1"
+                    HorizontalOptions="End" 
+                         HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent"/>
+            
+            <ImageButton Source="minus.png" Command="{Binding DownCommand}"  IsEnabled="{Binding DownEnable}"
+                    Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2"
+                    HorizontalOptions="StartAndExpand" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent"/>
 
+            <Grid HorizontalOptions="FillAndExpand" Grid.Row="9">
+            </Grid>
+            <Button   
+                    Text="Procesar" CornerRadius="25"  Grid.Row="10"  Grid.ColumnSpan="3"
+                TextColor="White" BackgroundColor="#00AE0C" Command="{Binding GuardarCommand}"
+                 Margin="20,20" />
 
-                            <StackLayout Orientation="Vertical" Padding="20,0" >
-                            
-                            <Label Text="Restante de producto" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
-                            <Label Text="{Binding CantidadTotal}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+        </Grid>
 
-                            <Label Text="precio total" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
-                            <Label Text="{Binding PrecioTotal}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-
-
-                        </StackLayout>
-                    </StackLayout>
-                    </StackLayout>
-
-                    <StackLayout Orientation="Vertical">
-                    <Label Text="Detalle del producto" FontSize="20" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontAttributes="Bold"/>
-                    <StackLayout Orientation="Vertical" Padding="0,5">
-                        <Label Text="precio de producto:" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
-                        <Label Text="{Binding Precio}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Vertical" Padding="0,5">
-                        <Label Text="cantidad total:" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
-                        <Label Text="{Binding CantidadP}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-                    </StackLayout>
-
-                </StackLayout>
-                    
-                </StackLayout>
-                <StackLayout VerticalOptions="CenterAndExpand">
-                    <!-- middle controls -->
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" VerticalOptions="End">
-                    <!-- bottom controls -->
-                    <Button Text="Pagar" Command="{Binding GuardarCommand}" />
-                </StackLayout>
-            </StackLayout>
         
     </ContentPage.Content>
 </ContentPage>
