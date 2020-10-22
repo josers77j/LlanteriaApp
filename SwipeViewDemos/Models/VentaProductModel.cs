@@ -10,10 +10,14 @@ namespace SwipeViewDemos.Models
         private int _Cantidad;
         private double _Precio;
         private int _IdCategoria;
+        private string _Medida;
+        private double _Total;
 
-     
         private bool _Factura;
         private int _IdProducto;
+        private int _Cantidadv;
+        private DateTime _Time;
+        private bool _BoolMedida;
 
         public int ID_Product { get; set; }
 
@@ -46,15 +50,12 @@ namespace SwipeViewDemos.Models
 
         public int ID_Sell { get; set; }
 
-        private int _Cantidadv;
-
+       
         public int Cantidadv
         {
             get { return _Cantidadv; }
             set { _Cantidadv = value; }
         }
-
-
 
         public bool Factura
         {
@@ -66,6 +67,36 @@ namespace SwipeViewDemos.Models
         {
             get { return _IdProducto; }
             set { _IdProducto = value; }
+        }
+
+
+       
+        public DateTime Time
+        {
+            get { return _Time; }
+            set { _Time = value; }
+        }
+
+
+        public double Total
+        {
+            get { return _Total; }
+            set { _Total = value; }
+        }
+
+
+        public string Medida
+        {
+            get { return _Medida; }
+            set { _Medida = value; }
+        }
+
+
+
+        public bool BoolMedida
+        {
+            get { return _BoolMedida; }
+            set { _BoolMedida = value; }
         }
 
 

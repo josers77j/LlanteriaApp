@@ -33,6 +33,22 @@ namespace SwipeViewDemos.Models
             set { _IdProducto = value; }
         }
 
+        private double _Total;
+
+        public double Total
+        {
+            get { return _Total; }
+            set { _Total = value; }
+        }
+
+
+        private DateTime _Time;
+
+        public DateTime Time
+        {
+            get { return _Time; }
+            set { _Time = value; }
+        }
 
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "91TSq+tw08DjCDv4onwgYbAPrQvCwt7H5Q1BN/+tS2rJTSRUMJwdE4E8Gvyn6X18H4S6SB6tMYClXyUI56KnAA==",
+  "dgSpecHash": "wbYgy+MIzjup0TvRZlReEEdPzUlY5OOMNKu1vAY1akwlkYLOR2t0aocfhNM/4xiObqEpfhp7GKSv+MGuozOFlg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj",
+  "projectFilePath": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",

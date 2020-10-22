@@ -2027,11 +2027,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.Android\\SwipeViewDemos.Android.csproj",
+      "projectUniqueName": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos.Android\\SwipeViewDemos.Android.csproj",
       "projectName": "SwipeViewDemos.Android",
-      "projectPath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.Android\\SwipeViewDemos.Android.csproj",
+      "projectPath": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos.Android\\SwipeViewDemos.Android.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.Android\\obj\\",
+      "outputPath": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -2052,8 +2052,8 @@
       "frameworks": {
         "monoandroid90": {
           "projectReferences": {
-            "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj": {
-              "projectPath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj"
+            "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj": {
+              "projectPath": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj"
             }
           }
         }

@@ -7,15 +7,16 @@
              x:Class="SwipeViewDemos.View.ProductoEditView"
              xmlns:vm="clr-namespace:SwipeViewDemos.ViewModel">
     <NavigationPage.TitleView>
-        <Label Text="Productos" FontSize="25" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+        <Label Text="Productos" TextColor="Black" FontSize="25" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
     </NavigationPage.TitleView>
     <ContentPage.BindingContext>
         <vm:ProductoEditViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
 
-        <Grid Padding="5">
+        <Grid Padding="4">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -34,40 +35,52 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label Text="Productos" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-               FontSize="20" Padding="10,10"/>
-            <Label Text="Rellena los campos para agregar el producto" FontSize="Medium"
-               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,10"/>
+           
+            <Label Text="Rellena todos los campos" FontSize="Medium"
+               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,10" TextColor="Black"/>
 
-            <Label Padding="10,10" Text="Nombre del producto" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center"/>
-            <Entry Text="{Binding Producto.Nombre_Producto}"  
-               Placeholder="105,60,15..." Grid.Row="2" Grid.Column="1" >
+            <Label Padding="10,10" Text="Nombre del producto" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center" TextColor="Black"/>
+            <Entry Text="{Binding _Producto}"  
+               Placeholder="Neumatico..." Grid.Row="2" Grid.Column="1" ClearButtonVisibility="WhileEditing">
+            </Entry>
+
+
+            <Label Padding="10,10" Text="Precio del producto" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" TextColor="Black"/>
+            <Entry Text="{Binding Precio}" Keyboard="Numeric"
+               Placeholder="49.99..." Grid.Row="3" Grid.Column="1" ClearButtonVisibility="WhileEditing">
+            </Entry>
+
+            <Label Padding="10,10" Text="Cantidad de producto" Grid.Row="4" Grid.Column="0" VerticalOptions="Center" TextColor="Black"/>
+            <Entry Text="{Binding Cantidad}"
+               Keyboard="Numeric"
+               Placeholder="5..." Grid.Row="4" Grid.Column="1" ClearButtonVisibility="WhileEditing">
             </Entry>
             
 
-            <Label Padding="10,10" Text="Precio del producto" Grid.Row="3" Grid.Column="0" VerticalOptions="Center"/>
-            <Entry Text="{Binding Precio}" Keyboard="Numeric"
-               Placeholder="49.99..." Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label Padding="10,10" Text="Medida del producto" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center"
+                   TextColor="Black"/>
+            <Entry Text="{Binding Medida}"  
+               Placeholder="195-70-14" Grid.Row="5" Grid.Column="1" ClearButtonVisibility="WhileEditing">
             </Entry>
+          
 
-            <Label Padding="10,10" Text="Cantidad de producto" Grid.Row="4" Grid.Column="0" VerticalOptions="Center"/>
-            <Entry Text="{Binding Cantidad}"
-               Keyboard="Numeric"
-               Placeholder="5..." Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
-            </Entry>
+            <Label Padding="10,10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="Marca la casilla junto a medida si el producto es un neumatico, caso contrario ignora este campo" 
+                   Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center" />
 
-            <Label Padding="10,10" Text="Categoria/Marca" Grid.Row="5" Grid.Column="0" VerticalOptions="Center"/>
+            <Label Padding="10,10" Text="Categoria/Marca" Grid.Row="7" Grid.Column="0" VerticalOptions="Center" TextColor="Black"/>
             <Picker Title="Ninguna seleccionada" ItemsSource="{Binding oCategory}" 
                     ItemDisplayBinding="{Binding Nombre_Categoria}" SelectedItem="{Binding Category}" 
                     FontFamily="Poppins-Light.ttf#Poppins-Light"
-                    Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" />
-
-            <Grid HorizontalOptions="FillAndExpand" Grid.Row="7">
+                    Grid.Row="7" Grid.Column="1"  
+                    FontSize="14"/>
+            
+                <Grid HorizontalOptions="FillAndExpand" Grid.Row="8">
             </Grid>
             <Button   
-                    Text="Guardar" CornerRadius="25"  Grid.Row="8"  Grid.ColumnSpan="3"
+                    Text="Guardar" CornerRadius="25"  Grid.Row="9"  Grid.ColumnSpan="3"
                 TextColor="White" BackgroundColor="#00AE0C" Command="{Binding GuardarCommand}"
-                 Margin="20,20" />
+                 Margin="20,20" 
+               />
             
         </Grid>
 

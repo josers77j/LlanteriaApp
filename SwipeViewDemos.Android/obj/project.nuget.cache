@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MM+3RUJWn5qiCcHgEEV8upUMzQnvsqFSv0A8v2/ClkaOgf/xXbQOnVFSVhbQ5WSqnQ+h4hD38MOraE2OiEDP1Q==",
+  "dgSpecHash": "DPVFXYiJGoqfSbhSwZViG1iJUABDxZC3YMQUymJTI4wUDea2r6kqYvfeCtQmvO/lRKl/dwVNQoUWvdlQ71V1tQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.Android\\SwipeViewDemos.Android.csproj",
+  "projectFilePath": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos.Android\\SwipeViewDemos.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\rg.plugins.popup\\1.2.0.223\\rg.plugins.popup.1.2.0.223.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\sqlite-net-pcl\\1.6.292\\sqlite-net-pcl.1.6.292.nupkg.sha512",

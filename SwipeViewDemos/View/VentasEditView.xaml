@@ -10,7 +10,7 @@
         <VM:VentasEditViewModel/>
     </ContentPage.BindingContext>
     <NavigationPage.TitleView>
-        <Label Text="Ventas" FontSize="25"  FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+        <Label Text="Ventas" FontSize="25" TextColor="#000" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
     </NavigationPage.TitleView>
     <ContentPage.Content>
 
@@ -34,61 +34,63 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label Text="Ventas" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-               FontSize="20" Padding="10,10"/>
-            <Label Text="Rellena los campos para hacer una venta" FontSize="Medium"
-               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,10"/>
 
-            <Label Padding="10,10" Text="Categoria" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center"/>
-            <Picker Title="Ovation/Reparacion(Opcional)" 
+            <Label Text="Rellena los campos para hacer una venta" TextColor="#000" FontSize="Medium"
+               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Padding="10,10"/>
+
+            <Label Padding="10,10" Text="Categoria" TextColor="#000" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center"/>
+            <Picker Title="(Opcional)" TextColor="#000" 
                     ItemsSource="{Binding oCategoria}" SelectedItem="{Binding Categoria}" ItemDisplayBinding="{Binding Nombre_Categoria}" 
                     FontFamily="Poppins-Light.ttf#Poppins-Light"
-                    Grid.Row="2" Grid.Column="1" />
-            
-         
+                    Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"/>
 
-            <Label Padding="10,10" Text="Producto" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" />
-            <Picker Title="`105,60,15/mecha..." 
+
+
+            <Label Padding="10,10" Text="Producto" TextColor="#000" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" />
+            <Picker Title="`Seleccionar..." TextColor="#000"
                     ItemsSource="{Binding oProductos}" ItemDisplayBinding="{Binding Nombre_Producto}" SelectedItem="{Binding Productos}" 
                     FontFamily="Poppins-Light.ttf#Poppins-Light"
-                    Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" />
-            <Label Padding="10,10" Grid.Row="3" Grid.Column="2" Text="{Binding Precio, StringFormat='${0}'}" VerticalOptions="Center"/>
+                    Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
+                    x:Name="froda"/>
+            <Label Padding="10,10" Grid.Row="3" Grid.Column="3" Text="{Binding Precio, StringFormat='${0}'}" TextColor="#000" VerticalOptions="Center" HorizontalOptions="End"/>
 
-            <Label Text="Factura"
+            <Label Text="Factura" TextColor="#000"
                    Grid.Row="4" Grid.Column="0" VerticalOptions="Center"
                    Padding="10,10"/>
             
-            <Label Grid.Row="4" Grid.Column="2" 
-                Text="si" IsVisible="{Binding lblsi}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
+          
             <CheckBox Grid.Row="4" Grid.Column="1" 
                 IsChecked="{Binding Factura}"/>
-            <Label Grid.Row="4" Grid.Column="2"
-                Text="no" IsVisible="{Binding lblno}" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
 
 
-
-
-            <Label Text="{Binding CantidadLbL}" FontSize="20" FontFamily="Poppins-Light.ttf#Poppins-Light"
+            <Label Text="{Binding CantidadLbL}" TextColor="#000" FontSize="20" FontFamily="Poppins-Light.ttf#Poppins-Light"
                    Grid.Row="7" Grid.Column="1"
                    HorizontalOptions="Center" VerticalOptions="Center"/>
             
             <ImageButton Source="plus.png" Command="{Binding UpCommand}"  IsEnabled="{Binding UpEnable}"
-                    Grid.Row="8"  Grid.Column="0" Grid.ColumnSpan="1"
+                    Grid.Row="7"  Grid.Column="0" Grid.ColumnSpan="1"
                     HorizontalOptions="End" 
                          HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent"/>
             
             <ImageButton Source="minus.png" Command="{Binding DownCommand}"  IsEnabled="{Binding DownEnable}"
-                    Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2"
+                    Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2"
                     HorizontalOptions="StartAndExpand" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent"/>
+
+            <Label Text="Productos en stock:" TextColor="#000"
+                   Grid.Row="8" Grid.Column="0" VerticalOptions="Center"
+                   Padding="10,10"/>
+            <Label Text="{Binding CantidadTotal}" TextColor="#000"
+                   Grid.Row="8" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End" 
+                   FontAttributes="Bold"/>
 
             <Grid HorizontalOptions="FillAndExpand" Grid.Row="9">
             </Grid>
             <Button   
-                    Text="Procesar" CornerRadius="25"  Grid.Row="10"  Grid.ColumnSpan="3"
+                    Text="{Binding ProcesarTexto}" CornerRadius="25"  Grid.Row="10"  Grid.ColumnSpan="4"
                 TextColor="White" BackgroundColor="#00AE0C" Command="{Binding GuardarCommand}"
                  Margin="20,20" />
 

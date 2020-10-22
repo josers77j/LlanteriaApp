@@ -1,4 +1,5 @@
 ﻿using SwipeViewDemos.Models;
+using SwipeViewDemos.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace SwipeViewDemos.ViewModel
     public class VentasEditViewModel : BaseClass
     {
         //codigo de la ventana ventas edit view 
-
+        //agregar medida 
 
         #region propiedades full/observable collection
         private ObservableCollection<ProductoModel> _oProductos;
@@ -53,6 +54,10 @@ namespace SwipeViewDemos.ViewModel
                 Precio = Productos != null ? Productos.Precio : 0;
                 PrecioTotal = Productos != null ? Productos.Precio : 0;
                 CantidadLbL = 1;
+                var precio = PrecioTotal;
+                var cantidad = CantidadLbL;
+                ProcesarTexto = $"Productos agregados: {cantidad}  - $ {Math.Round(PrecioTotal, 2)}";
+               
                 enableButtonD();
                 enableButtonU();
                 
@@ -80,7 +85,19 @@ namespace SwipeViewDemos.ViewModel
             {
                 _Categoria = value;
                 OnPropertyChanged();
-                LlenarProducto(_Categoria.ID);
+                if (Categoria != null)
+                {
+                    LlenarProducto(_Categoria.ID);
+                    
+                }
+                else
+                {
+                    cargarcategorias();
+                }
+               
+                //Categoria = (string.IsNullOrEmpty)(Categoria.ID.ToString()) ? cargarcategorias(); : LlenarProducto(_Categoria.ID);
+
+               
             }
         }
         #endregion
@@ -91,11 +108,25 @@ namespace SwipeViewDemos.ViewModel
         public Command GuardarCommand { get; set; }
         public Command UpCommand { get; set; }
         public Command DownCommand { get; set; }
- 
+
 
         #endregion
 
         #region propiedades de muestra
+
+        //procesar texto es parte del boton de procesar
+        private string _ProcesarTexto;
+
+        public string ProcesarTexto
+        {
+            get { return _ProcesarTexto; }
+            set { _ProcesarTexto = value;
+                OnPropertyChanged();
+
+            }
+        }
+
+        // implementar al stepper
         private int _CantidadP;
 
         public int CantidadP
@@ -108,7 +139,7 @@ namespace SwipeViewDemos.ViewModel
 
             }
         }
-
+        // implementar al stepper
         private int _CantidadTotal;
 
         public int CantidadTotal
@@ -132,44 +163,12 @@ namespace SwipeViewDemos.ViewModel
                 _Factura = value;
                 OnPropertyChanged();
                 Venta.Factura = Factura;
-                lblno = true;
-                if (Factura == true)
-                {
-                    lblsi = true;
-                    lblno = false;
-                }
-                else
-                {
-                    lblsi = false;
-                    lblno = true;
-                }
+               
             }
         }
 
-        private bool _lblsi;
-        public bool lblsi
-        {
-            get { return _lblsi; }
-            set
-            {
-                _lblsi = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool _lblno;
-
-        public bool lblno
-        {
-            get { return _lblno; }
-            set
-            {
-                _lblno = value;
-                OnPropertyChanged();
-            }
-        }
-
-
+       
+        //implementar al stepper
         private int Cantidadl;
 
         public int CantidadLbL
@@ -178,25 +177,33 @@ namespace SwipeViewDemos.ViewModel
             set { Cantidadl = value; OnPropertyChanged(); }
         }
 
+
+        //implementar al stepper
         private double _Precio;
 
         public double Precio
         {
             get { return _Precio; }
             set { _Precio = value; OnPropertyChanged();
+               
             }
         }
-
+        //implementar al stepper
         private double _PrecioTotal;
 
         public double PrecioTotal
         {
             get { return _PrecioTotal; }
-            set { _PrecioTotal = value; OnPropertyChanged(); }
+            set { _PrecioTotal = value; OnPropertyChanged();
+                var precio = PrecioTotal;
+                var cantidad = CantidadLbL;
+                ProcesarTexto = $"Productos agregados: {cantidad}  - $ {Math.Round(PrecioTotal, 2)}";
+
+            }
         }
 
         
-
+        //cambiar por stepper
         private bool _UpEnable;
 
         public bool UpEnable
@@ -205,7 +212,7 @@ namespace SwipeViewDemos.ViewModel
             set { _UpEnable = value; OnPropertyChanged(); }
         }
 
-
+        //cambiar por stepper
         private bool _DownEnable;
 
         public bool DownEnable
@@ -213,6 +220,18 @@ namespace SwipeViewDemos.ViewModel
             get { return _DownEnable; }
             set { _DownEnable = value; OnPropertyChanged(); }
         }
+
+        private DateTime _Mytime;
+
+        public DateTime Mytime
+        {
+            get { return _Mytime; }
+            set { _Mytime = value;
+               
+           
+            }
+        }
+
 
         #endregion
 
@@ -226,10 +245,12 @@ namespace SwipeViewDemos.ViewModel
             CancelarCommand = new Command(cancelar);
             UpCommand = new Command(Up);
             DownCommand = new Command(Down);
-            CantidadLbL = 1;
-            lblno = true;           
+            CantidadLbL = 1;          
             enableButtonD();
             enableButtonU();
+            var precio = PrecioTotal;
+            var cantidad = CantidadLbL;
+            ProcesarTexto = $"Productos agregados: {cantidad}  - $ {Math.Round(PrecioTotal, 2)}";
         }
 
 
@@ -239,12 +260,21 @@ namespace SwipeViewDemos.ViewModel
 
         private async void LlenarProducto(int IdCategoria)
         {
-            var ListaTemporal = await App.pDatabase.GetItemsAsync();
-            var ListaFiltrada = (from c in ListaTemporal
-                                 where c.IdCategoria == IdCategoria
-                                 select c).ToList();
-            oProductos = null;
-            oProductos = new ObservableCollection<ProductoModel>(ListaFiltrada);
+            try
+            {
+                var ListaTemporal = await App.pDatabase.GetItemsAsync();
+                var ListaFiltrada = (from c in ListaTemporal
+                                     where c.IdCategoria == IdCategoria
+                                     select c).ToList();
+                oProductos = null;
+                oProductos = new ObservableCollection<ProductoModel>(ListaFiltrada);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
 
@@ -267,10 +297,11 @@ namespace SwipeViewDemos.ViewModel
 
         private async void guardar()
         {
-            var action = await App.Current.MainPage.DisplayAlert("Realizar venta","Esta seguro?","Proceder","Cancelar");
-            if (action == true)
+            try
             {
-                try
+
+                var action = await App.Current.MainPage.DisplayAlert("Realizar venta", "Esta seguro?", "Proceder", "Cancelar");
+                if (action == true)
                 {
 
                     if (CantidadLbL <= 0 || CantidadP <= 0)
@@ -280,38 +311,57 @@ namespace SwipeViewDemos.ViewModel
 
                     else
                     {
+
                         Venta.ID = 0;
                         Venta.Cantidad = CantidadLbL;
                         Venta.IdProducto = Productos.ID;
                         Venta.Factura = Factura;
+                        Venta.Total = PrecioTotal;
+
+
+                        Venta.Time = DateTime.Now;
+
                         await App.vDatabase.SaveItemAsync(Venta);
                         Productos.ID = Productos.ID;
                         Productos.Cantidad = CantidadTotal;
                         await App.pDatabase.SaveItemAsync(Productos);
                         var continuar = await App.Current.MainPage.DisplayAlert("Mensaje", "Venta exitosa", "Finalizar", "Nueva venta");
-                        if(continuar == true)
-                        { 
-                        await App.Current.MainPage.Navigation.PopAsync();
+                        if (continuar == true)
+                        {
+                            await App.Current.MainPage.Navigation.PopAsync();
                         }
                         else
                         {
-                           
+                            metodo();
                         }
                     }
 
                 }
-                catch (Exception)
-                {
-                    await App.Current.MainPage.DisplayAlert("Alerta", "Error en la venta", "Atras");
-                }
+
+
+
             }
-            else
-            {
-                //nada xd
-            }
+
             
+            
+              catch (Exception)
+            {
+                await App.Current.MainPage.DisplayAlert("Alerta", "Error en la venta", "Atras");
+            }
         }
 
+        private async void metodo()
+        {
+            var listatemporal = await App.Database.GetItemsAsync();
+          
+            var listaproducto = await App.pDatabase.GetItemsAsync();
+            oProductos = null;
+            oCategoria = null;
+            oProductos = new ObservableCollection<ProductoModel>(listaproducto);
+            oCategoria = new ObservableCollection<CategoriaModel>(listatemporal);
+        }
+
+        //cambiar por stepper
         private void Down()
         {
             int x, y;
@@ -336,7 +386,8 @@ namespace SwipeViewDemos.ViewModel
             enableButtonD();
             enableButtonU();
         }
-
+        
+        //cambiar por stepper
         private async void Up()
         {
             int x, y;
@@ -364,6 +415,8 @@ namespace SwipeViewDemos.ViewModel
             enableButtonU();
             enableButtonD();
         }
+
+        //cambiar por stepper
         private void enableButtonD()
         {
             if (CantidadLbL <= 1)

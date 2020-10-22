@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace SwipeViewDemos.ViewModel
 {
    
     public class ProductoEditViewModel : BaseClass
     {
+
+        
 
         #region propiedades full/observable collection
         private ObservableCollection<CategoriaModel> _oCategory;
@@ -57,6 +60,34 @@ namespace SwipeViewDemos.ViewModel
                 OnPropertyChanged(); }
         }
 
+        private string _Medida;
+
+        public string Medida
+        {
+            get { return _Medida; }
+            set { _Medida = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _Product;
+
+        public string _Producto
+        {
+            get { return _Product; }
+            set { _Product = value; 
+                OnPropertyChanged(); }
+        }
+
+        private bool _BoolMedida;
+
+        public bool BoolMedida
+        {
+            get { return _BoolMedida; }
+            set { _BoolMedida = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -84,6 +115,7 @@ namespace SwipeViewDemos.ViewModel
             await App.Current.MainPage.Navigation.PopAsync();
         }
 
+    
         private async void CargarCategory()
         {
             var listatemporal = await App.Database.GetItemsAsync();
@@ -94,35 +126,65 @@ namespace SwipeViewDemos.ViewModel
         {
             try
             {
-                if 
-            ((string.IsNullOrEmpty(Producto.Nombre_Producto)) ||
-            (string.IsNullOrEmpty(Producto.Precio.ToString())) ||
-            (string.IsNullOrEmpty(Producto.Cantidad.ToString())) ||
-            (string.IsNullOrEmpty(Producto.IdCategoria.ToString())))
+                var action = await App.Current.MainPage.DisplayAlert("Se agregara un nuevo producto", "Esta seguro?", "Guardar", "Cancelar");
+                if (action == true)
                 {
-                    await App.Current.MainPage.DisplayAlert("Mensaje", "Todos los campos deben estar llenos", "ok");
-                }
-                else
-                {
-                    Producto.ID = 0;
-                    Producto.IdCategoria = Category.ID;
-                    Producto.Precio = Convert.ToDouble(Precio);
-                    Producto.Cantidad = Convert.ToInt32(Cantidad);
-                    
-                    await App.pDatabase.SaveItemAsync(Producto);
-                    await App.Current.MainPage.Navigation.PopAsync();
 
+                    if
+                ((string.IsNullOrEmpty(Producto.Precio.ToString())) ||
+                (string.IsNullOrEmpty(Producto.Cantidad.ToString())) ||
+                (string.IsNullOrEmpty(Producto.IdCategoria.ToString())))
+                    {
+                    
+                        await App.Current.MainPage.DisplayAlert("Mensaje", "Todos los campos deben estar llenos", "ok");
+                    }
+                  
+                    else
+                    {
+
+                        Producto.ID = 0;
+                        Producto.IdCategoria = Category.ID;
+                        var n = _Producto != null ? _Producto : Producto.Nombre_Producto = "Neumatico";
+                        var m = Medida != null ? Medida : Producto.Medida = "---";
+                        var b = Medida != null ? BoolMedida = true : Producto.BoolMedida = false;
+                        Producto.Medida = m;
+                        Producto.Nombre_Producto = n;
+                        Producto.Precio = Convert.ToDouble(Precio);
+                        Producto.Cantidad = Convert.ToInt32(Cantidad);
+                        Producto.BoolMedida = BoolMedida;
+
+                        await App.pDatabase.SaveItemAsync(Producto);
+                        var accion = await App.Current.MainPage.DisplayAlert("Mensaje", "Desea agregar un nuevo producto", "Nuevo", "Cerrar");
+                        if (accion == true)
+                        {
+                            var listatemporal = await App.Database.GetItemsAsync();
+                            oCategory = null;
+                            oCategory = new ObservableCollection<CategoriaModel>(listatemporal);
+                            _Producto = null;
+                            Medida = null;
+                            Precio = null;
+                            BoolMedida = false;
+                            Cantidad = null;
+                        }
+                        else
+                        {
+                            await App.Current.MainPage.Navigation.PopAsync();
+                        }
+                    }
                 }
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Message","Ocurrio un error","ok");
-                throw;
+                await App.Current.MainPage.DisplayAlert("Message", "Ocurrio un error", "ok");
+                await App.Current.MainPage.Navigation.PopAsync();
             }
-        
+
+            }
+
 
             #endregion
 
         }
     }
-}
+
+

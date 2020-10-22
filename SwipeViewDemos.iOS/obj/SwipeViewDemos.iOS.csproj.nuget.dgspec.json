@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj": {}
+    "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj": {
+    "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj",
+        "projectUniqueName": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj",
         "projectName": "SwipeViewDemos.iOS",
-        "projectPath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj",
+        "projectPath": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos.iOS\\SwipeViewDemos.iOS.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos.iOS\\obj\\",
+        "outputPath": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos.iOS\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -32,8 +32,8 @@
         "frameworks": {
           "xamarinios10": {
             "projectReferences": {
-              "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj": {
-                "projectPath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj"
+              "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj": {
+                "projectPath": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj"
               }
             }
           }
@@ -61,14 +61,14 @@
         }
       }
     },
-    "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj": {
+    "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj",
+        "projectUniqueName": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj",
         "projectName": "SwipeViewDemos",
-        "projectPath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj",
+        "projectPath": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos\\SwipeViewDemos.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL\\source\\repos\\LlanteriaApp\\SwipeViewDemos\\obj\\",
+        "outputPath": "C:\\Users\\DELL\\Source\\Repos\\LlanteriaApp\\SwipeViewDemos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -128,7 +128,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -14,13 +14,14 @@
         <ToolbarItem IconImageSource="mas.png" Command="{Binding NuevoCommand}"/>
     </ContentPage.ToolbarItems>
     <NavigationPage.TitleView>
-        <Label Text="Ventas" FontSize="25" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
+        <Label Text="Ventas" TextColor="#000" FontSize="25" FontAttributes="Bold" FontFamily="Poppins-Medium.ttf#Poppins-Medium"/>
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="(desliza desde arriba hacia abajo para refrescar la lista de Ventas)" FontSize="15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
-
+            <Picker Title="Ordenar por:" ItemsSource="{Binding OLista}" SelectedItem="{Binding MiLista}" ItemDisplayBinding="{Binding Lista}"/>
             <RefreshView IsRefreshing="{Binding IsRefreshing}" RefreshColor="#000" Command="{Binding RefreshCommand}">
+                
                 <ListView
                 ItemsSource="{Binding oProductVenta}"
                 SelectedItem="{Binding ProductVenta}"                 
@@ -36,16 +37,28 @@
                                 </ViewCell.ContextActions>
                                 <StackLayout Padding="10,10">
                                     <StackLayout Orientation="Horizontal" Padding="5,5">
-                                        <Label Text="Nombre de Producto:" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="21"/>
-                                        <Label Text="{Binding Nombre_Producto}" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="21"/>
+                                        <Label Text="Nombre de Producto:" TextColor="#000" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="14"/>
+                                        <Label Text="{Binding Nombre_Producto}" TextColor="#000" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="13"/>
                                     </StackLayout>
+
                                     <StackLayout Orientation="Horizontal" Padding="5,5">
-                                        <Label Text="Productos Vendidos: " FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="16"/>
-                                        <Label Text="{Binding Cantidadv}" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="16"/>
+                                        <Label Text="Medida: " TextColor="#000" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="14"/>
+                                        <Label Text="{Binding Medida}" TextColor="#000" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="12"/>
                                     </StackLayout>
+
                                     <StackLayout Orientation="Horizontal" Padding="5,5">
-                                        <Label Text="Total en venta: " FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="16"/>
-                                        <Label Text="{Binding NPrice}" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="16"/>
+                                        <Label Text="Productos Vendidos: " TextColor="#000" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="14"/>
+                                        <Label Text="{Binding Cantidadv}" TextColor="#000" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="12"/>
+                                    </StackLayout>
+                                    
+                                    <StackLayout Orientation="Horizontal" Padding="5,5">
+                                        <Label Text="Total en venta: " TextColor="#000" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="14"/>
+                                        <Label Text="{Binding Total, StringFormat='${0}'}" TextColor="#000" FontSize="12"/>
+                                    </StackLayout>
+                                    
+                                    <StackLayout Orientation="Horizontal" Padding="5,5">
+
+                                        <Label Text="{Binding Time}" TextColor="#000" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="12"/>
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell>
@@ -54,6 +67,9 @@
 
                 </ListView>
             </RefreshView>
+
+
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

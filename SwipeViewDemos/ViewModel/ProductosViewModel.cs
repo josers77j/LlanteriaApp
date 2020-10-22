@@ -3,6 +3,8 @@ using SwipeViewDemos.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -12,8 +14,69 @@ namespace SwipeViewDemos.ViewModel
 {
     public class ProductosViewModel:BaseClass
     {
-		#region refresh view function
-		const int RefreshDuration = 2;
+		readonly List<OrderByModel> items;
+
+        private ObservableCollection<OrderByModel> _OList;
+
+        public ObservableCollection<OrderByModel> OList
+        {
+            get { return _OList; }
+            set { _OList = value; }
+        }
+
+
+        private OrderByModel _List;
+
+        public OrderByModel List
+        {
+            get { return _List; }
+            set { _List = value;
+				OnPropertyChanged();
+
+				Filtrar(List.Lista);
+			}
+        }
+
+        private async void Filtrar(string lista)
+        {
+			var listafiltrada = await App.pDatabase.GetItemsAsync();
+			switch (lista)
+            {
+				case string A when A == "Ordenar de A a Z":
+			
+					oProductos = new ObservableCollection<ProductoModel>(listafiltrada.OrderBy(n => n.Nombre_Producto));
+					break;
+
+				case string Z when Z == "Ordenar de Z a A":
+				
+					oProductos = new ObservableCollection<ProductoModel>(listafiltrada.OrderByDescending(z => z.Nombre_Producto));
+					break;
+
+				case string MY when MY == "Menor Precio":
+				
+					oProductos = new ObservableCollection<ProductoModel>(listafiltrada.OrderBy(z => z.Precio));
+					break;
+
+				case string MN when MN == "Mayor Precio":
+					
+					oProductos = new ObservableCollection<ProductoModel>(listafiltrada.OrderByDescending(z => z.Precio));
+					break;
+
+				case string MC when MC == "Menor Cantidad":
+					
+					oProductos = new ObservableCollection<ProductoModel>(listafiltrada.OrderBy(z => z.Cantidad));
+					break;
+
+				case string MC when MC == "Mayor Cantidad":
+					
+					oProductos = new ObservableCollection<ProductoModel>(listafiltrada.OrderByDescending(z => z.Cantidad));
+					break;
+			}
+        }
+
+
+        #region refresh view function
+        const int RefreshDuration = 2;
 
 		bool isRefreshing;
 
@@ -34,6 +97,14 @@ namespace SwipeViewDemos.ViewModel
 			IsRefreshing = true;
 			await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
 			cargarProductos();
+            if (List != null)
+            {
+				Filtrar(List.Lista);
+            }
+			else
+            {
+				cargarProductos();
+            }
 			IsRefreshing = false;
 		}
 
@@ -78,11 +149,29 @@ namespace SwipeViewDemos.ViewModel
 			NuevoCommand = new Command(nuevo);
 			DeleteCommand = new Command<ProductoModel>(async (Product) => await delete(Product));
 			cargarProductos();
-		}
-		#endregion
 
-		#region metodos
-		private async Task delete(ProductoModel Product)
+			items = new List<OrderByModel>()
+			{
+				new OrderByModel { Lista = "Ordenar de A a Z"},
+				new OrderByModel { Lista = "Ordenar de Z a A"},
+				new OrderByModel { Lista = "Mayor Precio"},
+				new OrderByModel { Lista = "Menor Precio"},
+				new OrderByModel { Lista = "Mayor Cantidad"},
+				new OrderByModel { Lista = "Menor Cantidad"},
+			};
+			llenarList();
+		}
+
+        private void llenarList()
+        {
+			var listatemporal = items;
+			OList = new ObservableCollection<OrderByModel>(listatemporal);
+        }
+
+        #endregion
+
+        #region metodos
+        private async Task delete(ProductoModel Product)
 		{
 			var answer = await App.Current.MainPage.DisplayAlert("Mensaje", "Al eliminar un producto, se borrara de la lista de ventas, esta seguro?", "si", "no");
 			if (answer == true)
@@ -111,8 +200,7 @@ namespace SwipeViewDemos.ViewModel
 		#endregion
 
 
+	
 
-
-
-	}
+    }
 }

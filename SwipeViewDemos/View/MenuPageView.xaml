@@ -17,7 +17,7 @@
     <ContentPage.Content>
         <StackLayout Padding="20,25">
             <Label Text="Bienvenido" 
-            FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="36" />
+            FontFamily="Poppins-Medium.ttf#Poppins-Medium" TextColor="#000" FontSize="36" />
 
             <Label Text="Opciones" FontSize="20" FontFamily="Poppins-Light.ttf#Poppins-Light"/>
             <StackLayout Orientation="Horizontal" Padding="0,20">

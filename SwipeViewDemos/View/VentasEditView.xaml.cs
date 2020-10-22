@@ -18,8 +18,7 @@ namespace SwipeViewDemos.View
         {
 
             InitializeComponent();
-     
-
+    
         }
 
 
