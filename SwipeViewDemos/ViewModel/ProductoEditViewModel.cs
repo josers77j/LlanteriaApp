@@ -98,9 +98,18 @@ namespace SwipeViewDemos.ViewModel
         #endregion
 
         #region constructor/es
+        public ProductoEditViewModel(ProductoModel product)
+        {
+            Producto = new ProductoModel();
+            Category = new CategoriaModel();
+            Producto.ID = product.ID;
+            Producto.Medida = product.Medida;
+            Producto.Nombre_Producto = product.Nombre_Producto;
+            Category.ID = product.IdCategoria;
+            
+        }
         public ProductoEditViewModel()
         {
-          
             Producto = new ProductoModel();
             Category = new CategoriaModel();
             ProductCommand = new Command(product);

@@ -52,7 +52,7 @@
 
             <Label Padding="10,10" Text="Producto" TextColor="#000" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" />
             <Picker Title="`Seleccionar..." TextColor="#000"
-                    ItemsSource="{Binding oProductos}" ItemDisplayBinding="{Binding Nombre_Producto}" SelectedItem="{Binding Productos}" 
+                    ItemsSource="{Binding oProductos}" ItemDisplayBinding="{Binding Medida}" SelectedItem="{Binding Productos}" 
                     FontFamily="Poppins-Light.ttf#Poppins-Light"
                     Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
                     x:Name="froda"/>
@@ -66,19 +66,10 @@
             <CheckBox Grid.Row="4" Grid.Column="1" 
                 IsChecked="{Binding Factura}"/>
 
-
-            <Label Text="{Binding CantidadLbL}" TextColor="#000" FontSize="20" FontFamily="Poppins-Light.ttf#Poppins-Light"
-                   Grid.Row="7" Grid.Column="1"
-                   HorizontalOptions="Center" VerticalOptions="Center"/>
             
-            <ImageButton Source="plus.png" Command="{Binding UpCommand}"  IsEnabled="{Binding UpEnable}"
-                    Grid.Row="7"  Grid.Column="0" Grid.ColumnSpan="1"
-                    HorizontalOptions="End" 
-                         HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent"/>
+            <Stepper Maximum="{Binding StepperValueMax}" Minimum="0" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Value="{Binding StepperValue}" IsEnabled="{Binding StepperEnable}"/>
+            <Label Text="{Binding StepperValue}" Grid.Row="7" Grid.Column="3"/>
             
-            <ImageButton Source="minus.png" Command="{Binding DownCommand}"  IsEnabled="{Binding DownEnable}"
-                    Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2"
-                    HorizontalOptions="StartAndExpand" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent"/>
 
             <Label Text="Productos en stock:" TextColor="#000"
                    Grid.Row="8" Grid.Column="0" VerticalOptions="Center"

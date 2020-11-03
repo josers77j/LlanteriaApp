@@ -29,7 +29,6 @@
 
                                 <ViewCell.ContextActions>
                                     <MenuItem Text="Eliminar" Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference productlist}}" CommandParameter="{Binding .}}" />
-                                    <MenuItem Text="Editar" Command="{Binding Path=BindingContext.EditCommand, Source={x:Reference productlist}}" CommandParameter="{Binding .}}" />
                             </ViewCell.ContextActions>
                                 <StackLayout Padding="10,10">
                                     <StackLayout Orientation="Horizontal" Padding="5,5">

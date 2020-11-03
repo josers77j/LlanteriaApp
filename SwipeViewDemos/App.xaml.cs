@@ -30,7 +30,7 @@ namespace SwipeViewDemos
                 if (database == null)
                 {
                     database =
-                         new LlanteriaDataBase(DependencyService.Get<IFileHelper>().GetLocalFilePath("Cat.db3"));
+                         new LlanteriaDataBase(DependencyService.Get<IFileHelper>().GetLocalFilePath("Cat1.db3"));
                 }
                 return database;
             }

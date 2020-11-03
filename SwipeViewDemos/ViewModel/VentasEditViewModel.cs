@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using System.Security.Cryptography;
 using System.Text;
 using Xamarin.Forms;
 
@@ -34,35 +36,13 @@ namespace SwipeViewDemos.ViewModel
             get { return _Productos; }
             set
             {
-                _Productos = value;
+                _Productos = value;                
+                ComprobarProducto();
                 OnPropertyChanged();
-                CantidadP = Productos != null ? Productos.Cantidad : 0;
-                
-                var z = Productos != null ? Productos.Cantidad : 0; ;
-
-                CantidadTotal = z;
-
-                if (CantidadP == 0)
-                {
-                    
-                }
-                else
-                {
-                    CantidadTotal = z - 1;
-                }
-                
-                Precio = Productos != null ? Productos.Precio : 0;
-                PrecioTotal = Productos != null ? Productos.Precio : 0;
-                CantidadLbL = 1;
-                var precio = PrecioTotal;
-                var cantidad = CantidadLbL;
-                ProcesarTexto = $"Productos agregados: {cantidad}  - $ {Math.Round(PrecioTotal, 2)}";
-               
-                enableButtonD();
-                enableButtonU();
-                
             }
         }
+
+       // readonly List<CategoriaModel> Lista;
 
         private ObservableCollection<CategoriaModel> _oCategoria;
 
@@ -95,8 +75,7 @@ namespace SwipeViewDemos.ViewModel
                     cargarcategorias();
                 }
                
-                //Categoria = (string.IsNullOrEmpty)(Categoria.ID.ToString()) ? cargarcategorias(); : LlenarProducto(_Categoria.ID);
-
+               
                
             }
         }
@@ -194,10 +173,8 @@ namespace SwipeViewDemos.ViewModel
         public double PrecioTotal
         {
             get { return _PrecioTotal; }
-            set { _PrecioTotal = value; OnPropertyChanged();
-                var precio = PrecioTotal;
-                var cantidad = CantidadLbL;
-                ProcesarTexto = $"Productos agregados: {cantidad}  - $ {Math.Round(PrecioTotal, 2)}";
+            set { _PrecioTotal = value; OnPropertyChanged();              
+                ProcesarTexto = $"Productos agregados: {StepperValue}  - $ {Math.Round(PrecioTotal, 2)}";
 
             }
         }
@@ -226,11 +203,44 @@ namespace SwipeViewDemos.ViewModel
         public DateTime Mytime
         {
             get { return _Mytime; }
-            set { _Mytime = value;
-               
-           
+            set { _Mytime = value;                          
             }
         }
+
+        private int _StepperValue;
+
+        public int StepperValue
+        {
+            get { return _StepperValue; }
+            set { _StepperValue = value;
+
+                ProcesarTexto = $"Productos agregados: {StepperValue}  - $ {Math.Round(PrecioTotal, 2)}";                
+                ComprobarStepper();
+                OnPropertyChanged();
+            }
+        }
+
+        private int _StepperValueMax;
+
+        public int StepperValueMax
+        {
+            get { return _StepperValueMax; }
+            set { _StepperValueMax = value;
+                OnPropertyChanged();
+                
+            }
+        }
+
+        private bool _StepperEnable;
+
+        public bool StepperEnable
+        {
+            get { return _StepperEnable; }
+            set { _StepperEnable = value; 
+                OnPropertyChanged(); }
+        }
+
+
 
 
         #endregion
@@ -239,18 +249,22 @@ namespace SwipeViewDemos.ViewModel
         public VentasEditViewModel()
         {
             Venta = new VentaModel();
-            GuardarCommand = new Command(guardar);
+            GuardarCommand = new Command(guardar);            
+            CancelarCommand = new Command(cancelar);
+          
+            
             cargarproductos();
             cargarcategorias();
-            CancelarCommand = new Command(cancelar);
-            UpCommand = new Command(Up);
-            DownCommand = new Command(Down);
-            CantidadLbL = 1;          
-            enableButtonD();
-            enableButtonU();
+         
             var precio = PrecioTotal;
-            var cantidad = CantidadLbL;
-            ProcesarTexto = $"Productos agregados: {cantidad}  - $ {Math.Round(PrecioTotal, 2)}";
+            
+            ProcesarTexto = $"Productos agregados: {StepperValue}  - $ {Math.Round(PrecioTotal, 2)}";
+            StepperValueMax = 1;
+
+            //Lista = new List<CategoriaModel>()
+            //{ 
+            //    new CategoriaModel { ID = 1, Nombre_Categoria = "Reparacion" }, 
+            //};
         }
 
 
@@ -258,8 +272,41 @@ namespace SwipeViewDemos.ViewModel
 
         #region metodos
 
-        private async void LlenarProducto(int IdCategoria)
+        private async void ComprobarProducto()
         {
+            try
+            {
+                StepperValue = 0;
+                PrecioTotal = 0;
+                CantidadTotal = 0;
+
+                CantidadP = Productos != null ? Productos.Cantidad : 0;                
+                Precio = Productos != null ? Productos.Precio : 0;
+                
+                CantidadTotal = CantidadP;
+
+                if (CantidadP != 0)
+                {
+                    StepperEnable = true;
+                    StepperValueMax = CantidadP;
+                    
+                }                               
+                else
+                {
+                    StepperEnable = false;
+                    StepperValueMax = 1;
+                }
+                ProcesarTexto = $"Productos agregados: {StepperValue}  - $ {Math.Round(PrecioTotal, 2)}";
+                
+            }
+            catch (Exception)
+            {
+                await App.Current.MainPage.DisplayAlert("Mesnsaje", "Ocurrio un error", "ok");                                     
+            }                                 
+        }
+
+        private async void LlenarProducto(int IdCategoria)
+        {            
             try
             {
                 var ListaTemporal = await App.pDatabase.GetItemsAsync();
@@ -268,10 +315,10 @@ namespace SwipeViewDemos.ViewModel
                                      select c).ToList();
                 oProductos = null;
                 oProductos = new ObservableCollection<ProductoModel>(ListaFiltrada);
+
             }
             catch (Exception)
             {
-
                 throw;
             }
             
@@ -292,7 +339,10 @@ namespace SwipeViewDemos.ViewModel
         private async void cargarproductos()
         {
             var listatemporal = await App.pDatabase.GetItemsAsync();
-            oProductos = new ObservableCollection<ProductoModel>(listatemporal);
+            var filtrarlista = (from x in listatemporal
+                                where x.Nombre_Producto == "Neumatico"
+                                select x).ToList();
+            oProductos = new ObservableCollection<ProductoModel>(filtrarlista);
         }
 
         private async void guardar()
@@ -304,26 +354,21 @@ namespace SwipeViewDemos.ViewModel
                 if (action == true)
                 {
 
-                    if (CantidadLbL <= 0 || CantidadP <= 0)
+                    if (StepperValue <= 0 || CantidadP <= 0)
                     {
                         await App.Current.MainPage.DisplayAlert("Alerta", "No selecciono una cantidad /No quedan productos /No selecciono un producto", "ok");
                     }
-
                     else
                     {
-
                         Venta.ID = 0;
-                        Venta.Cantidad = CantidadLbL;
+                        Venta.Cantidad = StepperValue;
                         Venta.IdProducto = Productos.ID;
                         Venta.Factura = Factura;
                         Venta.Total = PrecioTotal;
-
-
                         Venta.Time = DateTime.Now;
-
                         await App.vDatabase.SaveItemAsync(Venta);
                         Productos.ID = Productos.ID;
-                        Productos.Cantidad = CantidadTotal;
+                        Productos.Cantidad = CantidadP - StepperValue;
                         await App.pDatabase.SaveItemAsync(Productos);
                         var continuar = await App.Current.MainPage.DisplayAlert("Mensaje", "Venta exitosa", "Finalizar", "Nueva venta");
                         if (continuar == true)
@@ -337,13 +382,7 @@ namespace SwipeViewDemos.ViewModel
                     }
 
                 }
-
-
-
-            }
-
-            
-            
+            }            
               catch (Exception)
             {
                 await App.Current.MainPage.DisplayAlert("Alerta", "Error en la venta", "Atras");
@@ -357,89 +396,28 @@ namespace SwipeViewDemos.ViewModel
             var listaproducto = await App.pDatabase.GetItemsAsync();
             oProductos = null;
             oCategoria = null;
-            oProductos = new ObservableCollection<ProductoModel>(listaproducto);
-            oCategoria = new ObservableCollection<CategoriaModel>(listatemporal);
+            cargarproductos();
+            cargarcategorias();
         }
 
-        //cambiar por stepper
-        private void Down()
-        {
-            int x, y;
-            double z;
-            x = CantidadLbL;
-            y = CantidadTotal;
-            z = PrecioTotal;
-            if (x <= 1)
-            {
 
+        private void ComprobarStepper()
+        {           
+            PrecioTotal = StepperValue * Precio;
+             int c = Productos != null ? Productos.Cantidad : 0;
+            if (StepperValue != 0)
+            {
+                int ct = c;
+                CantidadTotal = ct - StepperValue;
             }
             else
             {
-                x--;
-                y++;
-                z = PrecioTotal - Precio;
+                CantidadTotal = c;
             }
-            CantidadLbL = x;
-            CantidadTotal = y;
-            PrecioTotal = z;
-
-            enableButtonD();
-            enableButtonU();
+            
         }
+
         
-        //cambiar por stepper
-        private async void Up()
-        {
-            int x, y;
-            double z;
-            x = CantidadLbL;
-            y = CantidadTotal;
-            z = PrecioTotal;
-
-           
-
-            if (x >= _CantidadP)
-            {
-                await App.Current.MainPage.DisplayAlert("mensaje", "seleccione un producto/ limite de producto alcanzado", "ok");
-            }
-            else
-            {
-                x++;
-                y--;
-                z = Precio * x;
-            }
-            CantidadLbL = x;
-            CantidadTotal = y;
-            PrecioTotal = z;
-
-            enableButtonU();
-            enableButtonD();
-        }
-
-        //cambiar por stepper
-        private void enableButtonD()
-        {
-            if (CantidadLbL <= 1)
-            {
-                DownEnable = false;
-            } 
-            else
-            {
-                DownEnable = true;
-            }
-
-        }
-        private void enableButtonU()
-        {
-            if (CantidadLbL >= _CantidadP)
-            {
-                UpEnable = false;
-            }
-            else
-            {
-                UpEnable = true;
-            }
-        }
 
         #endregion
 

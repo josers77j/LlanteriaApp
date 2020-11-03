@@ -3,6 +3,7 @@ using SwipeViewDemos.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -140,14 +141,18 @@ namespace SwipeViewDemos.ViewModel
 		#region propiedades/command
 		public Command DeleteCommand { get; set; }
 		public Command NuevoCommand { get; set; }
+        public Command VentaCommand { get; set; }
+        public Command EditCommand { get; set; }
+        #endregion
 
-		#endregion
-
-		#region constructor/es
-		public ProductosViewModel()
+        #region constructor/es
+        public ProductosViewModel()
 		{
 			NuevoCommand = new Command(nuevo);
 			DeleteCommand = new Command<ProductoModel>(async (Product) => await delete(Product));
+			VentaCommand = new Command<ProductoModel>(async (Product) => await venta(Product));
+			EditCommand = new Command<ProductoModel>(async (Product) => await edit(Product));
+
 			cargarProductos();
 
 			items = new List<OrderByModel>()
@@ -162,16 +167,31 @@ namespace SwipeViewDemos.ViewModel
 			llenarList();
 		}
 
-        private void llenarList()
+        private Task venta(ProductoModel product)
         {
-			var listatemporal = items;
-			OList = new ObservableCollection<OrderByModel>(listatemporal);
+            throw new NotImplementedException();
         }
+
+
 
         #endregion
 
         #region metodos
-        private async Task delete(ProductoModel Product)
+
+        private async Task edit(ProductoModel product)
+		{
+			var pagina = new ProductoEditView();
+			pagina.BindingContext = new ProductoEditViewModel(product);
+			await App.Current.MainPage.Navigation.PushAsync(pagina);
+		}
+
+		private void llenarList()
+		{
+			var listatemporal = items;
+			OList = new ObservableCollection<OrderByModel>(listatemporal);
+		}
+
+		private async Task delete(ProductoModel Product)
 		{
 			var answer = await App.Current.MainPage.DisplayAlert("Mensaje", "Al eliminar un producto, se borrara de la lista de ventas, esta seguro?", "si", "no");
 			if (answer == true)

@@ -31,7 +31,8 @@
                             <ViewCell>
                                 <ViewCell.ContextActions>
                                     <MenuItem Text="Eliminar" Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference productlist}}" CommandParameter="{Binding .}}" />
-                                    
+                                    <MenuItem Text="Editar" Command="{Binding Path=BindingContext.EditCommand, Source={x:Reference productlist}}" CommandParameter="{Binding .}}" />
+                                    <MenuItem Text="vender" Command="{Binding Path=BindingContext.VentaCommand, Source={x:Reference productlist}}" CommandParameter="{Binding .}}" />
                                 </ViewCell.ContextActions>
                                 <StackLayout Padding="10,10">
                                     
@@ -49,14 +50,11 @@
                                         <Label Text="Cantidad: " TextColor="Black" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="14"/>
                                         <Label Text="{Binding Cantidad}" TextColor="Black" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="12"/>
                                     </StackLayout>
-                                    
+
                                     <StackLayout Orientation="Horizontal" Padding="5,5">
                                         <Label Text="Precio: " TextColor="Black" FontFamily="Poppins-Medium.ttf#Poppins-Medium" FontSize="14"/>
                                         <Label Text="{Binding Precio, StringFormat='${0}'}" TextColor="Black" FontFamily="Poppins-Light.ttf#Poppins-Light" FontSize="12"/>
                                     </StackLayout>
-                                    
-
-
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
