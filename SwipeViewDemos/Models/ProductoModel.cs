@@ -18,7 +18,7 @@ namespace SwipeViewDemos.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
-
+//codigo demas
         public string Nombre_Producto
         {
             get { return _Nombre_Producto; }
